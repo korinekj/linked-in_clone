@@ -1,0 +1,11 @@
+React + Redux + TypeScript
+
+Eslint + Airbnb + Prettier
+
+Firebase
+-Cloud Firestore (Database)
+-Authentication
+
+CSS
+-BEM naming convention
+
