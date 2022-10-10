@@ -6,7 +6,7 @@ interface Home {
   Icon: React.ElementType;
 }
 
-function HeaderOption({ Icon, title }: Home) {
+function HeaderOption({ Icon, title }: Home): JSX.Element {
   return (
     <div className='header-option'>
       {Icon && <Icon className='header-option__icon' />}
