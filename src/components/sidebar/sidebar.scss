@@ -28,5 +28,73 @@
       border-radius: 0.5rem 0.5rem 0 0;
       object-fit: cover;
     }
+
+    > h2 {
+      font-size: 1.3rem;
+    }
+
+    > h4 {
+      color: gray;
+      font-size: 1rem;
+    }
+  }
+
+  .sidebar__stats {
+    padding: 0.6rem;
+    margin-bottom: 0.6rem;
+    background-color: white;
+    border: 1px solid lightgray;
+    border-radius: 0 0 0.5rem 0.5rem;
+
+    .sidebar__stat {
+      margin-top: 0.6rem;
+      display: flex;
+      justify-content: space-between;
+
+      > p {
+        color: gray;
+        font-size: 0.9rem;
+        font-weight: 600;
+      }
+
+      .sidebar__statNumber {
+        font-weight: bold;
+        color: #0a66c2;
+      }
+    }
+  }
+
+  .sidebar__bottom {
+    text-align: left;
+    padding: 1rem;
+    border: 1px solid lightgray;
+    background-color: white;
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+
+    > p {
+      font-size: 0.9rem;
+      padding-bottom: 0.3rem;
+    }
+
+    .sidebar__recentItem {
+      display: flex;
+      font-size: 0.9rem;
+      color: gray;
+      font-weight: 600;
+      cursor: pointer;
+      margin-bottom: 0.2rem;
+      padding: 0.3rem;
+
+      .sidebar__hash {
+        margin-right: 0.4rem;
+      }
+
+      &:hover {
+        background-color: whitesmoke;
+        border-radius: 0.5rem;
+        color: black;
+      }
+    }
   }
 }

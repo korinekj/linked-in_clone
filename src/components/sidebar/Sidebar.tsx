@@ -4,6 +4,14 @@ import "./sidebar.scss";
 import Avatar from "@mui/material/Avatar";
 
 function Sidebar() {
+  //
+  const recentItem = (topic: string): JSX.Element => (
+    <div className='sidebar__recentItem'>
+      <span className='sidebar__hash'>#</span>
+      <p>{topic}</p>
+    </div>
+  );
+
   return (
     <div className='sidebar'>
       <div className='sidebar__top'>
@@ -27,6 +35,11 @@ function Sidebar() {
       </div>
       <div className='sidebar__bottom'>
         <p>Recent</p>
+        {recentItem("reactjs")}
+        {recentItem("programming")}
+        {recentItem("software engineering")}
+        {recentItem("design")}
+        {recentItem("developer")}
       </div>
     </div>
   );
