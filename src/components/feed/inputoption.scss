@@ -1,0 +1,17 @@
+.feed__input-option {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+  color: gray;
+  padding: 0.5rem;
+  cursor: pointer;
+
+  &:hover {
+    background-color: whitesmoke;
+    border-radius: 0.5rem;
+  }
+
+  > h4 {
+    margin-left: 0.2rem;
+  }
+}

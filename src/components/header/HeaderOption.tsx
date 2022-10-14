@@ -3,13 +3,13 @@ import "./header-option.scss";
 
 import Avatar from "@mui/material/Avatar";
 
-interface Home {
+interface Props {
   title: string;
   Icon?: React.ElementType;
   avatar?: string;
 }
 
-function HeaderOption(props: Home): JSX.Element {
+function HeaderOption(props: Props): JSX.Element {
   const { Icon, title, avatar } = props;
   return (
     <div className='header-option'>
