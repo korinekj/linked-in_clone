@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./feed.scss";
 
 import CreateIcon from "@mui/icons-material/Create";
@@ -10,11 +10,32 @@ import CalendarViewDayIcon from "@mui/icons-material/CalendarViewDay";
 import InputOption from "./InputOption";
 import Post from "./Post";
 
+import { db, collection, doc, getDocs, setDoc } from "../../firebase";
+
 function Feed() {
   const [posts, setPosts] = useState([]);
 
-  const sendPost = (event: Event) => {
-    event.preventDefault();
+  useEffect(() => {
+    async function getPosts() {
+      const postsCol = collection(db, "posts");
+      const postSnapshot = await getDocs(postsCol);
+      const postsList = postSnapshot.docs.map((document) => ({
+        id: document.id,
+        data: document.data(),
+      }));
+
+      console.log(postsList);
+    }
+
+    getPosts();
+  }, []);
+
+  const sendPost = () => {
+    (async function createData() {
+      await setDoc(doc(db, "posts"), {
+        name: "Test post",
+      });
+    })();
   };
 
   return (
@@ -41,9 +62,9 @@ function Feed() {
         </div>
       </div>
 
-      {posts.map((post) => (
+      {/* {posts.map((post) => (
         <Post />
-      ))}
+      ))} */}
 
       <Post
         name='Jarda Kořínek'
