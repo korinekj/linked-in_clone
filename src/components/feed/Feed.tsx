@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./feed.scss";
+
+import { collection, doc, getDocs, setDoc } from "firebase/firestore";
 
 import CreateIcon from "@mui/icons-material/Create";
 import ImageIcon from "@mui/icons-material/Image";
@@ -10,14 +12,14 @@ import CalendarViewDayIcon from "@mui/icons-material/CalendarViewDay";
 import InputOption from "./InputOption";
 import Post from "./Post";
 
-import { db, collection, doc, getDocs, setDoc } from "../../firebase";
+import { db } from "../../firebase";
 
 function Feed() {
-  const [posts, setPosts] = useState([]);
+  // const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     async function getPosts() {
-      const postsCol = collection(db, "posts");
+      const postsCol = collection(db, "users");
       const postSnapshot = await getDocs(postsCol);
       const postsList = postSnapshot.docs.map((document) => ({
         id: document.id,
@@ -30,12 +32,14 @@ function Feed() {
     getPosts();
   }, []);
 
-  const sendPost = () => {
-    (async function createData() {
-      await setDoc(doc(db, "posts"), {
-        name: "Test post",
-      });
-    })();
+  const handleSubmit = async () => {
+    // Add a new document in collection "cities"
+    await setDoc(doc(db, "users", "jkorinek"), {
+      firstName: "Jarda",
+      sureName: "Kořínek",
+      state: "Czech Republic",
+      status: "BŮH",
+    });
   };
 
   return (
@@ -45,7 +49,7 @@ function Feed() {
           <CreateIcon />
           <form action=''>
             <input type='text' />
-            <button type='submit' onClick={sendPost}>
+            <button type='submit' onClick={handleSubmit}>
               Send
             </button>
           </form>

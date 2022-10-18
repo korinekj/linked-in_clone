@@ -30,6 +30,7 @@ function Post(props: Props) {
 
       <div className='post__body'>
         <p>{message}</p>
+        <p>{photoUrl}</p>
       </div>
 
       <div className='post__buttons'>
