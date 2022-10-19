@@ -1,7 +1,13 @@
 import React, { useEffect } from "react";
 import "./feed.scss";
 
-import { collection, doc, getDocs, setDoc } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  // getDocs,
+  setDoc,
+  onSnapshot,
+} from "firebase/firestore";
 
 import CreateIcon from "@mui/icons-material/Create";
 import ImageIcon from "@mui/icons-material/Image";
@@ -15,27 +21,28 @@ import Post from "./Post";
 import { db } from "../../firebase";
 
 function Feed() {
-  // const [posts, setPosts] = useState([]);
+  // const [posts, setPosts] = useState<{}[]>([{}]);
 
   useEffect(() => {
     async function getPosts() {
       const postsCol = collection(db, "users");
-      const postSnapshot = await getDocs(postsCol);
-      const postsList = postSnapshot.docs.map((document) => ({
-        id: document.id,
-        data: document.data(),
-      }));
 
-      console.log(postsList);
+      onSnapshot(postsCol, (snapshot) => {
+        const data = snapshot.docs.map((document) => ({
+          id: document.id,
+          data: document.data(),
+        }));
+        console.log(data);
+      });
     }
-
     getPosts();
   }, []);
 
   const handleSubmit = async () => {
     // Add a new document in collection "cities"
-    await setDoc(doc(db, "users", "jkorinek"), {
-      firstName: "Jarda",
+
+    await setDoc(doc(db, "users", "jarda"), {
+      firstName: "PICE",
       sureName: "Kořínek",
       state: "Czech Republic",
       status: "BŮH",
