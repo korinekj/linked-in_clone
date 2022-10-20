@@ -3,10 +3,12 @@ import "./feed.scss";
 
 import {
   collection,
-  // addDoc,
+  addDoc,
   onSnapshot,
-  setDoc,
-  doc,
+  DocumentData,
+  orderBy,
+  query,
+  serverTimestamp,
 } from "firebase/firestore";
 
 import CreateIcon from "@mui/icons-material/Create";
@@ -20,13 +22,22 @@ import Post from "./Post";
 
 import { db } from "../../firebase";
 
+// type Posts = { id: string; data: DocumentData }[] | undefined;
+interface Posts {
+  id: string;
+  data: DocumentData;
+}
+
 function Feed() {
-  const [posts, setPosts] = useState<{}[]>([{}]);
+  const [input, setInput] = useState("");
+  const [posts, setPosts] = useState<Posts[] | undefined>();
 
   useEffect(() => {
     const postsCol = collection(db, "posts");
 
-    onSnapshot(postsCol, (snapshot) => {
+    const q = query(postsCol, orderBy("timeStamp", "desc"));
+
+    onSnapshot(q, (snapshot) => {
       setPosts(
         snapshot.docs.map((document) => ({
           id: document.id,
@@ -40,13 +51,16 @@ function Feed() {
 
   const handleSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    // Add a new document in collection "cities"
-    await setDoc(doc(db, "posts", "testtttt"), {
-      firstName: "ssss",
-      sureName: "Kořínek",
-      state: "Czech Republic",
-      status: "BŮH",
+    // Add a new document in collection "posts" -> using addDoc, dont need to add ID, it will be generated automatically
+    await addDoc(collection(db, "posts"), {
+      name: "Jarda Kořínek",
+      description: "Description",
+      message: input,
+      photoUrl: "photo url...",
+      timeStamp: serverTimestamp(),
     });
+
+    setInput("");
   };
 
   return (
@@ -55,7 +69,11 @@ function Feed() {
         <div className='feed__input'>
           <CreateIcon />
           <form action=''>
-            <input type='text' />
+            <input
+              type='text'
+              value={input}
+              onChange={(event) => setInput(event.target.value)}
+            />
             <button type='submit' onClick={handleSubmit}>
               Send
             </button>
@@ -73,16 +91,20 @@ function Feed() {
         </div>
       </div>
 
-      {/* {posts.map((post) => (
-        <Post />
-      ))} */}
+      {/* optional chaining -> posts je possibly undefined a to vyhodí TS error */}
+      {posts?.map((post) => {
+        console.log(post);
 
-      <Post
-        name='Jarda Kořínek'
-        description='Description'
-        message='Message goes here'
-        photoUrl='photo url...'
-      />
+        return (
+          <Post
+            key={post.id}
+            name='Jarda Kořínek'
+            description='ha'
+            message={post.data.message}
+            photoUrl='photo url...'
+          />
+        );
+      })}
     </div>
   );
 }
