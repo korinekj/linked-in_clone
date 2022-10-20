@@ -1,12 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./feed.scss";
 
 import {
   collection,
-  doc,
-  // getDocs,
-  setDoc,
+  // addDoc,
   onSnapshot,
+  setDoc,
+  doc,
 } from "firebase/firestore";
 
 import CreateIcon from "@mui/icons-material/Create";
@@ -21,28 +21,28 @@ import Post from "./Post";
 import { db } from "../../firebase";
 
 function Feed() {
-  // const [posts, setPosts] = useState<{}[]>([{}]);
+  const [posts, setPosts] = useState<{}[]>([{}]);
 
   useEffect(() => {
-    async function getPosts() {
-      const postsCol = collection(db, "users");
+    const postsCol = collection(db, "posts");
 
-      onSnapshot(postsCol, (snapshot) => {
-        const data = snapshot.docs.map((document) => ({
+    onSnapshot(postsCol, (snapshot) => {
+      setPosts(
+        snapshot.docs.map((document) => ({
           id: document.id,
           data: document.data(),
-        }));
-        console.log(data);
-      });
-    }
-    getPosts();
+        }))
+      );
+    });
   }, []);
 
-  const handleSubmit = async () => {
-    // Add a new document in collection "cities"
+  console.log(posts);
 
-    await setDoc(doc(db, "users", "jarda"), {
-      firstName: "PICE",
+  const handleSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    // Add a new document in collection "cities"
+    await setDoc(doc(db, "posts", "testtttt"), {
+      firstName: "ssss",
       sureName: "Kořínek",
       state: "Czech Republic",
       status: "BŮH",
