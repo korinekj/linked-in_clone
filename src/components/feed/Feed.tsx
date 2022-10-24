@@ -47,8 +47,6 @@ function Feed() {
     });
   }, []);
 
-  console.log(posts);
-
   const handleSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     // Add a new document in collection "posts" -> using addDoc, dont need to add ID, it will be generated automatically
