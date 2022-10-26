@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import "./login.scss";
 
 function Login() {
-  const register = () => {};
+  const [name, setName] = useState<string>("");
+  const [profilePicURL, setProfilePicURL] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+
+  const register = () => {
+    if (!name) {
+      alert("Please enter your full name");
+    }
+  };
   const loginToApp = () => {};
 
   return (
@@ -15,10 +24,30 @@ function Login() {
       />
 
       <form action=''>
-        <input type='text' placeholder='Full name' />
-        <input type='text' placeholder='Profile Pic Url (optional)' />
-        <input type='email' placeholder='Email' />
-        <input type='password' placeholder='Password' />
+        <input
+          type='text'
+          placeholder='Full name (required for registration)'
+          value={name}
+          onChange={(event) => setName(event.target.value)}
+        />
+        <input
+          type='text'
+          placeholder='Profile Pic Url (optional)'
+          value={profilePicURL}
+          onChange={(event) => setProfilePicURL(event.target.value)}
+        />
+        <input
+          type='email'
+          placeholder='Email'
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
+        />
+        <input
+          type='password'
+          placeholder='Password'
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}
+        />
 
         <button type='submit' onClick={loginToApp}>
           Sign In
