@@ -12,8 +12,6 @@ import Feed from "./components/feed/Feed";
 function App() {
   const user = useSelector(selectUser);
 
-  console.log(user);
-
   return (
     <div className='app'>
       <Header />

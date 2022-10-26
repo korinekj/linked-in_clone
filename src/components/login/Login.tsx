@@ -3,6 +3,7 @@ import "./login.scss";
 
 function Login() {
   const register = () => {};
+  const loginToApp = () => {};
 
   return (
     <div className='login'>
@@ -19,7 +20,9 @@ function Login() {
         <input type='email' placeholder='Email' />
         <input type='password' placeholder='Password' />
 
-        <button type='submit'>Sign In</button>
+        <button type='submit' onClick={loginToApp}>
+          Sign In
+        </button>
       </form>
 
       <p>
