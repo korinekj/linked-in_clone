@@ -1,16 +1,66 @@
 import React, { useState } from "react";
 import "./login.scss";
 
+import { useDispatch } from "react-redux";
+import { login } from "../../features/userSlice";
+
+import {
+  auth,
+  createUserWithEmailAndPassword,
+  updateProfile,
+} from "../../firebase";
+
 function Login() {
   const [name, setName] = useState<string>("");
   const [profilePicURL, setProfilePicURL] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
+  const dispatch = useDispatch();
+
   const register = () => {
     if (!name) {
       alert("Please enter your full name");
     }
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed In
+        console.log(userCredential);
+        const { user } = userCredential;
+        updateProfile(user, {
+          displayName: name,
+          photoURL: profilePicURL,
+        })
+          .then(() => {
+            // Profile Updated
+            console.log("updated");
+            dispatch(
+              login({
+                email: userCredential.user.email,
+                uid: userCredential.user.uid,
+                displayName: userCredential.user.displayName,
+                photoUrl: userCredential.user.photoURL,
+              })
+            );
+          })
+          .catch((error) => {
+            // An error occurred
+            console.log(error);
+          });
+
+        console.log(user);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+
+        console.log(errorCode);
+        console.log(errorMessage);
+
+        if (errorCode === "auth/email-already-in-use") {
+          alert("TENTO EMAIL JIŽ EXISTUJE");
+        }
+      });
   };
   const loginToApp = () => {};
 
@@ -61,7 +111,7 @@ function Login() {
           tabIndex={0}
           className='login__register'
           onClick={register}
-          onKeyUp={() => console.log("cus")}
+          onKeyUp={() => console.log("register onKeyUp")}
         >
           Register Now!
         </span>
