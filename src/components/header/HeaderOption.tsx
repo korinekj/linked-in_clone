@@ -7,17 +7,21 @@ interface Props {
   title: string;
   Icon?: React.ElementType;
   avatar?: string;
+  onClick?: React.MouseEventHandler;
 }
 
 function HeaderOption(props: Props): JSX.Element {
-  const { Icon, title, avatar } = props;
+  const { Icon, title, avatar, onClick } = props;
+
   return (
     <div className='header-option'>
       {Icon && <Icon className='header-option__icon' />}
       {avatar && (
         <Avatar src={avatar} alt='avatar_me' className='header-option__icon' />
       )}
-      <h3 className='header-option__title'>{title}</h3>
+      <h3 className='header-option__title' onClick={onClick}>
+        {title}
+      </h3>
     </div>
   );
 }
@@ -25,6 +29,7 @@ function HeaderOption(props: Props): JSX.Element {
 HeaderOption.defaultProps = {
   avatar: null,
   Icon: null,
+  onClick: null,
 };
 
 export default HeaderOption;

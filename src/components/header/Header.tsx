@@ -14,6 +14,14 @@ import ProfileAvatar from "../../assets/me.jpg";
 import HeaderOption from "./HeaderOption";
 
 function Header() {
+  const handleClick = (
+    event: React.MouseEvent<HTMLInputElement, MouseEvent>
+  ) => {
+    event.stopPropagation();
+
+    console.log("Heading clicked");
+  };
+
   return (
     <header className='header'>
       <div className='header__left'>
@@ -31,7 +39,11 @@ function Header() {
         <HeaderOption Icon={BusinessCenterIcon} title='Jobs' />
         <HeaderOption Icon={ChatIcon} title='Messaging' />
         <HeaderOption Icon={NotificationsIcon} title='Notifications' />
-        <HeaderOption avatar={ProfileAvatar} title='Me' />
+        <HeaderOption
+          avatar={ProfileAvatar}
+          title='Sign Out'
+          onClick={handleClick}
+        />
       </div>
     </header>
   );
