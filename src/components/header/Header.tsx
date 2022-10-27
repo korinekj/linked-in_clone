@@ -14,9 +14,7 @@ import ProfileAvatar from "../../assets/me.jpg";
 import HeaderOption from "./HeaderOption";
 
 function Header() {
-  const handleClick = (
-    event: React.MouseEvent<HTMLInputElement, MouseEvent>
-  ) => {
+  const handleClick = (event: React.MouseEvent<HTMLHeadingElement>) => {
     event.stopPropagation();
 
     console.log("Heading clicked");

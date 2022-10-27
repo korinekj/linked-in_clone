@@ -7,7 +7,7 @@ interface Props {
   title: string;
   Icon?: React.ElementType;
   avatar?: string;
-  onClick?: React.MouseEventHandler;
+  onClick?: React.MouseEventHandler<Element> | undefined;
 }
 
 function HeaderOption(props: Props): JSX.Element {
