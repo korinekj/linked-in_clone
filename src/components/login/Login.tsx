@@ -8,6 +8,7 @@ import {
   auth,
   createUserWithEmailAndPassword,
   updateProfile,
+  signInWithEmailAndPassword,
 } from "../../firebase";
 
 function Login() {
@@ -18,6 +19,7 @@ function Login() {
 
   const dispatch = useDispatch();
 
+  // Register new account with email and password
   const register = () => {
     if (!name) {
       alert("Please enter your full name");
@@ -62,7 +64,24 @@ function Login() {
         }
       });
   };
-  const loginToApp = () => {};
+
+  // Login to App with email and password
+  const loginToApp = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        console.log(userCredential);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+
+        console.log(errorCode);
+        console.log(errorMessage);
+      });
+  };
 
   return (
     <div className='login'>

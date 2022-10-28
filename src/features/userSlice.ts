@@ -3,7 +3,12 @@ import type { RootState } from "../app/store";
 
 // Define a type for the slice state
 interface UserState {
-  user: {} | null;
+  user: {
+    email: string;
+    uid: string;
+    displayName: string;
+    photoUrl: string;
+  } | null;
   value: {};
 }
 
