@@ -1,6 +1,8 @@
 import React from "react";
 import "./header.scss";
 
+import { useDispatch } from "react-redux";
+
 import SearchIcon from "@mui/icons-material/Search";
 import HomeIcon from "@mui/icons-material/Home";
 import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
@@ -13,11 +15,26 @@ import ProfileAvatar from "../../assets/me.jpg";
 
 import HeaderOption from "./HeaderOption";
 
+import { auth, signOut } from "../../firebase";
+import { logout } from "../../features/userSlice";
+
 function Header() {
+  const dispatch = useDispatch();
+
   const handleClick = (event: React.MouseEvent<HTMLHeadingElement>) => {
     event.stopPropagation();
 
     console.log("Heading clicked");
+
+    signOut(auth)
+      .then(() => {
+        // Sign-out succesfull.
+        dispatch(logout());
+      })
+      .catch((error) => {
+        // An error happened.
+        console.log(error);
+      });
   };
 
   return (

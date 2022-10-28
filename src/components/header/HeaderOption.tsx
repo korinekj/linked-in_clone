@@ -19,8 +19,14 @@ function HeaderOption(props: Props): JSX.Element {
       {avatar && (
         <Avatar src={avatar} alt='avatar_me' className='header-option__icon' />
       )}
-      <h3 className='header-option__title' onClick={onClick}>
-        {title}
+      <h3 className='header-option__title'>
+        {title === "Sign Out" ? (
+          <button type='button' onClick={onClick}>
+            {title}
+          </button>
+        ) : (
+          title
+        )}
       </h3>
     </div>
   );
