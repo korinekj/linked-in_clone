@@ -24,6 +24,7 @@ function Login() {
     if (!name) {
       alert("Please enter your full name");
     }
+
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed In
