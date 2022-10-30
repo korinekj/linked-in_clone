@@ -64,6 +64,8 @@ function Login() {
 
         if (errorCode === "auth/email-already-in-use") {
           alert("TENTO EMAIL JIŽ EXISTUJE");
+        } else if (errorCode === "auth/weak-password") {
+          alert("Password should be at least 6 characters");
         }
       });
   };
