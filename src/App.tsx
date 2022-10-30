@@ -10,6 +10,7 @@ import Login from "./components/login/Login";
 import Header from "./components/header/Header";
 import Sidebar from "./components/sidebar/Sidebar";
 import Feed from "./components/feed/Feed";
+import Widgets from "./components/widgets/Widgets";
 
 function App() {
   const user = useSelector(selectUser);
@@ -45,8 +46,7 @@ function App() {
         <div className='app__body'>
           <Sidebar />
           <Feed />
-          <Sidebar />
-          {/* Widgets (right side) */}
+          <Widgets />
         </div>
       )}
     </div>
