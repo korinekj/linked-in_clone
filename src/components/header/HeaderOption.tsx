@@ -23,11 +23,9 @@ function HeaderOption(props: Props): JSX.Element {
       {avatar && (
         <Avatar
           src={user?.photoUrl}
-          alt='avatar_me'
+          alt='header avatar'
           className='header-option__icon'
-        >
-          {user?.displayName[0]}
-        </Avatar>
+        />
       )}
       <h3 className='header-option__title'>
         {title === "Sign Out" ? (

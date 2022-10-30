@@ -24,9 +24,11 @@ function Sidebar() {
           src='https://images.unsplash.com/photo-1528460033278-a6ba57020470?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1335&q=80'
           alt=''
         />
-        <Avatar src={user?.photoUrl} className='sidebar__avatar'>
-          {user?.displayName[0]}
-        </Avatar>
+        <Avatar
+          src={user?.photoUrl}
+          className='sidebar__avatar'
+          alt='sidebar avatar'
+        />
 
         <h2>{user?.displayName}</h2>
         <h4>{user?.email}</h4>

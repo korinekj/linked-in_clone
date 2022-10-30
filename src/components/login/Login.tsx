@@ -25,6 +25,8 @@ function Login() {
       alert("Please enter your full name");
     }
 
+    console.log(name, profilePicURL);
+
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed In
