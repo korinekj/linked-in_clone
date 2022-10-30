@@ -10,10 +10,10 @@ import InputOption from "./InputOption";
 import "./post.scss";
 
 interface Props {
-  name: string;
+  name: string | undefined;
   description: string;
   message: string;
-  photoUrl: string;
+  photoUrl: string | undefined;
 }
 
 function Post(props: Props) {
@@ -21,7 +21,7 @@ function Post(props: Props) {
   return (
     <div className='post'>
       <div className='post__header'>
-        <Avatar />
+        <Avatar src={photoUrl}>{name?.[0]} </Avatar>
         <div className='post__info'>
           <h2>{name}</h2>
           <p>{description}</p>
@@ -30,7 +30,6 @@ function Post(props: Props) {
 
       <div className='post__body'>
         <p>{message}</p>
-        <p>{photoUrl}</p>
       </div>
 
       <div className='post__buttons'>

@@ -17,6 +17,9 @@ import SubscriptionsIcon from "@mui/icons-material/Subscriptions";
 import EventNoteIcon from "@mui/icons-material/EventNote";
 import CalendarViewDayIcon from "@mui/icons-material/CalendarViewDay";
 
+import { useSelector } from "react-redux";
+import { selectUser } from "../../features/userSlice";
+
 import InputOption from "./InputOption";
 import Post from "./Post";
 
@@ -31,6 +34,8 @@ interface Posts {
 function Feed() {
   const [input, setInput] = useState("");
   const [posts, setPosts] = useState<Posts[] | undefined>();
+
+  const user = useSelector(selectUser);
 
   useEffect(() => {
     const postsCol = collection(db, "posts");
@@ -51,10 +56,10 @@ function Feed() {
     event.preventDefault();
     // Add a new document in collection "posts" -> using addDoc, dont need to add ID, it will be generated automatically
     await addDoc(collection(db, "posts"), {
-      name: "Jarda Kořínek",
-      description: "Description",
+      name: user?.displayName,
+      description: user?.email,
       message: input,
-      photoUrl: "photo url...",
+      photoUrl: user?.photoUrl,
       timeStamp: serverTimestamp(),
     });
 
@@ -89,17 +94,17 @@ function Feed() {
         </div>
       </div>
 
-      {/* optional chaining -> posts je possibly undefined a to vyhodí TS error */}
+      {/* optional chaining -> posts je possibly undefined a to vyhodí error */}
       {posts?.map((post) => {
-        console.log(post);
+        const postData = post.data;
 
         return (
           <Post
             key={post.id}
-            name='Jarda Kořínek'
-            description='ha'
-            message={post.data.message}
-            photoUrl='photo url...'
+            name={postData.name}
+            description={postData.description}
+            message={postData.message}
+            photoUrl={postData.photoUrl}
           />
         );
       })}
