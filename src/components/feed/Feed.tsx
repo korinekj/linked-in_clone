@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 import "./feed.scss";
 
 import {
@@ -36,6 +37,8 @@ function Feed() {
   const [posts, setPosts] = useState<Posts[] | undefined>();
 
   const user = useSelector(selectUser);
+
+  const [feedPost] = useAutoAnimate<HTMLDivElement>();
 
   useEffect(() => {
     const postsCol = collection(db, "posts");
@@ -95,19 +98,21 @@ function Feed() {
       </div>
 
       {/* optional chaining -> posts je possibly undefined a to vyhodí error */}
-      {posts?.map((post) => {
-        const postData = post.data;
+      <div ref={feedPost}>
+        {posts?.map((post) => {
+          const postData = post.data;
 
-        return (
-          <Post
-            key={post.id}
-            name={postData.name}
-            description={postData.description}
-            message={postData.message}
-            photoUrl={postData.photoUrl}
-          />
-        );
-      })}
+          return (
+            <Post
+              key={post.id}
+              name={postData.name}
+              description={postData.description}
+              message={postData.message}
+              photoUrl={postData.photoUrl}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 }
