@@ -17,6 +17,19 @@ function HeaderOption(props: Props): JSX.Element {
 
   const user = useSelector(selectUser);
 
+  let headerOptionTitle;
+  if (title === "Sign Out" && user != null) {
+    headerOptionTitle = (
+      <button type='button' onClick={onClick}>
+        {title}
+      </button>
+    );
+  } else if (title === "Sign Out" && user === null) {
+    headerOptionTitle = undefined;
+  } else {
+    headerOptionTitle = title;
+  }
+
   return (
     <div className='header-option'>
       {Icon && <Icon className='header-option__icon' />}
@@ -29,15 +42,7 @@ function HeaderOption(props: Props): JSX.Element {
           {user?.email[0]}
         </Avatar>
       )}
-      <h3 className='header-option__title'>
-        {title === "Sign Out" ? (
-          <button type='button' onClick={onClick}>
-            {title}
-          </button>
-        ) : (
-          title
-        )}
-      </h3>
+      <h3 className='header-option__title'>{headerOptionTitle}</h3>
     </div>
   );
 }
