@@ -27,11 +27,13 @@
       border-color: red;
       color: gray;
       background-color: #eef3f8;
+      cursor: not-allowed;
 
       input {
         border: none;
         outline: none;
         background: none;
+        cursor: not-allowed;
       }
     }
   }
