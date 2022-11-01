@@ -63,7 +63,7 @@ function Login() {
         console.log(errorMessage);
 
         if (errorCode === "auth/email-already-in-use") {
-          alert("TENTO EMAIL JIŽ EXISTUJE");
+          alert("This email already exists");
         } else if (errorCode === "auth/weak-password") {
           alert("Password should be at least 6 characters");
         }
